@@ -1,19 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from skimage import measure
+from skimage import measure, io
+from skimage.color import rgb2gray
 
 
-# Construct some test data
-x, y = np.ogrid[-np.pi : np.pi : 100j, -np.pi : np.pi : 100j]
-r = np.sin(np.exp((np.sin(x) ** 3 + np.cos(y) ** 2)))
+image = io.imread("./images/geometry.png")
+
+image_in_greyscale = rgb2gray(image)
 
 # Find contours at a constant value of 0.8
-contours = measure.find_contours(r, 0.8)
+contours = measure.find_contours(image_in_greyscale, 0.55)
 
 # Display the image and plot all contours found
 fig, ax = plt.subplots()
-ax.imshow(r, cmap=plt.cm.gray)
+ax.imshow(image_in_greyscale, cmap=plt.cm.gray)
 
 for contour in contours:
     ax.plot(contour[:, 1], contour[:, 0], linewidth=2)

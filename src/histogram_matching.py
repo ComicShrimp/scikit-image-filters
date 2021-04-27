@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 
-from skimage import data
+from skimage import data, io
 from skimage import exposure
 from skimage.exposure import match_histograms
 
-reference = data.coffee()
-image = data.chelsea()
+reference = io.imread("./images/city.jpg")
+image = io.imread("./images/landscape.jpg")
 
 matched = match_histograms(image, reference, multichannel=True)
 
