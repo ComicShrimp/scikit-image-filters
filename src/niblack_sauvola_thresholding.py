@@ -3,12 +3,17 @@ import matplotlib.pyplot as plt
 
 from skimage.data import page
 from skimage.filters import threshold_otsu, threshold_niblack, threshold_sauvola
+from skimage import io
+from skimage.color import rgb2gray
 
+
+image = io.imread("./images/book.jpg")
+image_in_greyscale = rgb2gray(image)
 
 matplotlib.rcParams["font.size"] = 9
 
 
-image = page()
+image = image_in_greyscale
 binary_global = image > threshold_otsu(image)
 
 window_size = 25

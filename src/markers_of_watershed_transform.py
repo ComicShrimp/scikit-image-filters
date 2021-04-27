@@ -6,12 +6,15 @@ from skimage.segmentation import watershed
 from skimage import data
 from skimage.filters import rank
 from skimage.util import img_as_ubyte
+from skimage import io
+from skimage.color import rgb2gray
 
 
-image = img_as_ubyte(data.eagle())
+image = io.imread("./images/landscape.jpg")
+image_in_greyscale = rgb2gray(image)
 
 # denoise image
-denoised = rank.median(image, disk(2))
+denoised = rank.median(img_as_ubyte(image_in_greyscale), disk(2))
 
 # find continuous region (low gradient -
 # where less than 10 for this image) --> markers
